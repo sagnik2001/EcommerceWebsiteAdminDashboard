@@ -1,0 +1,93 @@
+body{
+    font-family: 'Supermercado One', cursive;
+    margin: 0;
+    padding: 0;
+}
+@media only screen and (max-width: 700px) {
+    .mobile{
+        padding-left: 0rem !important;
+        padding-right: 0rem !important;
+    }
+  }
+
+/*
+ * Sidebar
+ */
+
+ .sidebar {
+    position: fixed;
+    top: 0;
+    /* rtl:raw:
+    right: 0;
+    */
+    bottom: 0;
+    /* rtl:remove */
+    left: 0;
+   
+    padding-top: 60px;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  @media (max-width: 767.98px) {
+    .sidebar {
+      top: 5rem;
+    }
+  }
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    margin: 5px 0 5px 10px;
+    border-radius: 5px 0 0 5px;
+    text-decoration: none;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #727272;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #2470dc !important;
+  }
+  .sidebar ul li a{
+    display: block;
+    color: #333;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    margin: 5px 0 5px 10px;
+    border-radius: 5px 0 0 5px;
+    text-decoration: none;
+  }
+  .sidebar ul li a.active {
+    color: #2470dc !important;
+  
+  }
+  .sidebar li.nav-link.active, .sidebar a.nav-link:focus{
+    color: #2470dc !important;
+    font-size: 25px;
+  }
+  .sidebar a.nav-item.active,.sidebar a.nav-link:hover{
+    color: #2470dc !important;
+  }
+
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
