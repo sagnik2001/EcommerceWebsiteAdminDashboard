@@ -8,12 +8,17 @@ import AddCategoryModal from "../Containers/AddCategoryModal";
 const Category = () => {
   const [category, setcategory] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  
+  const [ categoryName,setcategoryName ] = useState('')
+  const [ categoryOption,setCategoryOption ] = useState('')
+  const [categoryImage,setCategoryImage] = useState('')
+  const token = window.localStorage.getItem('token')
+
   useEffect(() => {
     axios
       .get(`${api}/api/category/get`)
       .then((res) => {
         setcategory(res.data);
+      
       })
       .catch((err) => {
         console.log(err);
@@ -38,6 +43,8 @@ const Category = () => {
     return myCategory;
   };
 
+  
+
   const createCategoryList = (categories, options = []) => {
     for (let category of categories) {
       options.push({ value: category._id, name: category.name });
@@ -53,6 +60,48 @@ const Category = () => {
   }
 
   const createCategory = createCategoryList(category)
+
+  // Submit Handler Creating new form
+
+  const onSubmit = () =>{
+   
+    const form = new FormData()
+
+    form.append('name',categoryName)
+    form.append('parentId',categoryOption)
+    form.append('categoryPicture',categoryImage)
+
+
+    // adding categories
+
+    axios.post(`${api}/api/category/create`,form,   {
+      headers: { 
+          
+          'Content-Type' : 'application/json' ,
+          'Authorization' : `Bearer ${token}`
+      }
+  })
+  .then(res=>{
+    console.log(res.data)
+    axios
+    .get(`${api}/api/category/get`)
+    .then((res) => {
+      setcategory(res.data);
+      
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    setModalShow(false)
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+
+  }
+
+
+
   return (
     <>
       <Header />
@@ -80,6 +129,13 @@ const Category = () => {
               show={modalShow}
               onHide={() => setModalShow(false)}
               createCategory = {createCategory}
+              categoryName={categoryName}
+              setcategoryName={setcategoryName}
+              categoryImage={categoryImage}
+              setCategoryImage={setCategoryImage}
+              categoryOption={categoryOption}
+              setCategoryOption={setCategoryOption}
+              onSubmit={onSubmit}
             />
           </main>
         </div>

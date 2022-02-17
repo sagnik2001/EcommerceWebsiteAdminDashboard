@@ -22,9 +22,13 @@ const AddCategoryModal = (props) => {
             style={{ fontSize: "30px" }}
           >
             <Form.Label>Category Name</Form.Label>
-            <Form.Control type="email" placeholder="Enter name" size="lg" />
+            <Form.Control type="email" placeholder="Enter name" size="lg" value={props.categoryName} onChange={e=>{
+              props.setcategoryName(e.target.value)
+            }}  />
           </Form.Group>
-          <Form.Select aria-label="Default select example" size="lg" className="form-control form-control-sm">
+          <Form.Select aria-label="Default select example" size="lg" className="form-control form-control-sm" value={props.categoryOption} onChange={e=>{
+            props.setCategoryOption(e.target.value)
+          }}>
   <option>Select category</option>
  {
      props.createCategory.map((value)=>
@@ -34,7 +38,9 @@ const AddCategoryModal = (props) => {
 </Form.Select>
 <Row style={{marginTop:'2vh'}}>
                 <Col>
-                    <input type="file" name="categoryImage"  />
+                    <input type="file" name="categoryImage"  onChange={e=>{
+                      props.setCategoryImage(e.target.files[0])
+                    }} />
                 </Col>
             </Row>
         </Form>
@@ -43,7 +49,7 @@ const AddCategoryModal = (props) => {
         <Button variant="secondary" onClick={props.onHide}>
             Close
           </Button>
-          <Button variant="primary" onClick={props.onHide}>
+          <Button variant="primary" onClick={props.onSubmit}>
             Save Changes
           </Button>
       </Modal.Footer>
